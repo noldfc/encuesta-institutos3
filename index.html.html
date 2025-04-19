@@ -1,0 +1,33 @@
+
+[Previous HTML content remains the same until the form submission handler]
+        function handleClassicSubmit() {
+            if (!validateSection(3)) {
+                return false;
+            }
+
+            // Get the form data
+            const formData = new FormData(document.getElementById('surveyForm'));
+
+            // Submit the form data
+            fetch('https://script.google.com/macros/s/AKfycbz7OEFAO5cG2r3GKfV_h5Mhb5kVt2q8_PSKSm2xb_cKEB0V7WqeIrPszshNjDlKpgHg/exec', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                // Show thank you message and update progress bar
+                currentSection = 4;
+                document.getElementById('section-3').classList.remove('active');
+                document.getElementById('section-4').classList.add('active');
+                document.getElementById('progressBar').style.width = '100%';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Hubo un error al enviar el formulario. Por favor, intenta de nuevo.');
+            });
+
+            // Prevent the form from submitting normally
+            return false;
+        }
+    </script>
+</body>
+</html>
