@@ -603,11 +603,10 @@
 
             const formData = new FormData(document.getElementById('surveyForm'));
 
-            fetch('https://script.google.com/macros/s/AKfycbz7OEFAO5cG2r3GKfV_h5Mhb5kVt2q8_PSKSm2xb_cKEB0V7WqeIrPszshNjDlKpgHg/exec', {
-                method: 'POST',
-                mode: 'no-cors',
-                body: formData
-            })
+            fetch('https://encuesta-instituto-proxy.netlify.app/.netlify/functions/submit-survey', {
+  method: 'POST',
+  body: formData
+})
             .then(() => {
                 currentSection = 4;
                 showSection(4);
