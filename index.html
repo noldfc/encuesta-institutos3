@@ -1,515 +1,285 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Encuesta Instituto Chihuahua - Semestre 3</title>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-color: #4a5fc1;
-            --secondary-color: #7c3aed;
-            --background-color: #f8fafc;
-            --text-color: #1e293b;
-            --border-color: #e2e8f0;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: 'Lato', sans-serif;
-            background: var(--background-color);
-            color: var(--text-color);
-            line-height: 1.6;
-        }
-
-        .banner {
-            width: 100%;
-            max-height: 300px;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .banner img {
-            width: 100%;
-            height: auto;
-            object-fit: cover;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 2rem auto;
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .progress-container {
-            width: 100%;
-            height: 16px;
-            background: #e0e7ff;
-            border-radius: 8px;
-            margin-bottom: 2rem;
-            overflow: hidden;
-        }
-
-        #progressBar {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            width: 0%;
-            transition: width 0.4s ease;
-        }
-
-        .section {
-            display: none;
-        }
-
-        .section.active {
-            display: block;
-        }
-
-        .section-title {
-            color: var(--secondary-color);
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
-        }
-
-        .question {
-            margin-bottom: 1.5rem;
-        }
-
-        .question-text {
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        .options {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .option {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        input[type="radio"],
-        input[type="checkbox"] {
-            accent-color: var(--secondary-color);
-        }
-
-        input[type="text"],
-        textarea {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            margin-top: 0.5rem;
-            font-family: inherit;
-        }
-
-        textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
-
-        .nav-buttons {
-            display: flex;
-            justify-content: space-between;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        button {
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: background-color 0.3s;
-        }
-
-        button:hover {
-            background-color: var(--secondary-color);
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        .error-message {
-            color: #dc2626;
-            background: #fee2e2;
-            border: 1px solid #fecaca;
-            border-radius: 4px;
-            padding: 0.75rem;
-            margin-bottom: 1rem;
-            display: none;
-        }
-
-        .thank-you-content {
-            text-align: center;
-            padding: 2rem;
-        }
-
-        .thank-you-content h2 {
-            color: var(--secondary-color);
-            margin-bottom: 1.5rem;
-        }
-
-        .thank-you-content p {
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-        }
-
-        .thank-you-links {
-            background: var(--background-color);
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin-top: 2rem;
-        }
-
-        .thank-you-links a {
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .thank-you-links a:hover {
-            text-decoration: underline;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                margin: 1rem;
-                padding: 1rem;
-            }
-
-            button {
-                width: 100%;
-            }
-
-            .nav-buttons {
-                flex-direction: column;
-            }
-        }
-
-        .conditional-section {
-            display: none;
-        }
-
-        .conditional-section.show {
-            display: block;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Encuesta Instituto Chihuahua - Semestre 3</title>
+  <style>
+    :root {
+      --primary: #2c3e50;
+      --secondary: #2980b9;
+      --accent: #f39c12;
+      --background: #f4f4f4;
+      --white: #fff;
+      --error: #e74c3c;
+    }
+    body {
+      background: var(--background);
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      color: var(--primary);
+    }
+    .container {
+      max-width: 600px;
+      margin: 32px auto;
+      background: var(--white);
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(44,62,80,0.08);
+      padding: 32px 24px 24px 24px;
+    }
+    .banner {
+      width: 100%;
+      margin-bottom: 24px;
+      border-radius: 8px;
+      display: block;
+    }
+    h1 {
+      text-align: center;
+      color: var(--secondary);
+      margin-bottom: 8px;
+    }
+    h2 {
+      color: var(--primary);
+      margin-top: 32px;
+      margin-bottom: 12px;
+      font-size: 1.2em;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+    input[type="text"], textarea, select {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #bbb;
+      border-radius: 4px;
+      margin-bottom: 16px;
+      font-size: 1em;
+      background: #fafbfc;
+    }
+    textarea {
+      min-height: 60px;
+      resize: vertical;
+    }
+    .radio-group, .checkbox-group {
+      margin-bottom: 16px;
+    }
+    .radio-group label, .checkbox-group label {
+      display: inline-block;
+      margin-right: 18px;
+      font-weight: 400;
+    }
+    .progress-bar {
+      width: 100%;
+      background: #e0e0e0;
+      border-radius: 6px;
+      margin-bottom: 24px;
+      height: 12px;
+      overflow: hidden;
+    }
+    .progress {
+      height: 100%;
+      background: var(--secondary);
+      width: 0;
+      transition: width 0.3s;
+    }
+    .error {
+      color: var(--error);
+      margin-bottom: 12px;
+      font-size: 0.98em;
+    }
+    .button-group {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 24px;
+    }
+    button {
+      background: var(--secondary);
+      color: var(--white);
+      border: none;
+      padding: 10px 24px;
+      border-radius: 4px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    button:disabled {
+      background: #b2bec3;
+      cursor: not-allowed;
+    }
+    @media (max-width: 600px) {
+      .container {
+        padding: 16px 4vw 16px 4vw;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="banner">
-        <img src="survey banner- semestre 3.png" alt="Instituto de Religion Chihuahua Encuesta de Semestre 3">
-    </div>
-
-    <div class="container">
-        <div class="progress-container">
-            <div id="progressBar"></div>
+  <div class="container">
+    <img src="survey-banner-semestre-3.png" alt="Instituto de Religión Chihuahua Encuesta de Semestre 3" class="banner">
+    <h1>Encuesta de Semestre 3</h1>
+    <div class="progress-bar"><div class="progress" id="progress"></div></div>
+    <form id="surveyForm" autocomplete="off">
+      <div id="section-1" class="section">
+        <h2>Talleres</h2>
+        <label>¿Te gustaría que hubiera talleres en el Instituto?</label>
+        <div class="radio-group">
+          <label><input type="radio" name="QuiereTalleres" value="Sí" required> Sí</label>
+          <label><input type="radio" name="QuiereTalleres" value="No"> No</label>
         </div>
-
-        <form id="surveyForm">
-            <!-- Section 1: Talleres -->
-            <div class="section active" id="section1">
-                <h3 class="section-title">Sección 1: Talleres</h3>
-                
-                <div class="question">
-                    <p class="question-text">¿Te gustaría que se ofrecieran talleres durante el semestre 3?</p>
-                    <div class="options">
-                        <label class="option">
-                            <input type="radio" name="QuiereTalleres" value="Si" required>
-                            Sí
-                        </label>
-                        <label class="option">
-                            <input type="radio" name="QuiereTalleres" value="No">
-                            No
-                        </label>
-                        <label class="option">
-                            <input type="radio" name="QuiereTalleres" value="NoSeguro">
-                            No estoy seguro(a)
-                        </label>
-                    </div>
-                </div>
-
-                <div class="conditional-section" id="talleresSection">
-                    <div class="question">
-                        <p class="question-text">¿Qué tipo de talleres te interesarían?</p>
-                        <div class="options">
-                            <label class="option">
-                                <input type="checkbox" name="TipoTaller" value="DesarrolloEspiritual">
-                                Desarrollo espiritual
-                            </label>
-                            <label class="option">
-                                <input type="checkbox" name="TipoTaller" value="HabilidadesPracticas">
-                                Habilidades prácticas
-                            </label>
-                            <label class="option">
-                                <input type="checkbox" name="TipoTaller" value="ArteCreatividad">
-                                Arte y creatividad
-                            </label>
-                            <label class="option">
-                                <input type="checkbox" name="TipoTaller" value="ServicioVoluntariado">
-                                Servicio y voluntariado
-                            </label>
-                            <label class="option">
-                                <input type="checkbox" name="TipoTaller" value="SaludBienestar">
-                                Salud y bienestar
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="question">
-                        <p class="question-text">¿Tienes alguna sugerencia específica de taller?</p>
-                        <textarea name="SugerenciaTaller" placeholder="Escribe tu sugerencia aquí..."></textarea>
-                    </div>
-                </div>
-
-                <div class="question">
-                    <p class="question-text">¿Qué formato de clases te gustaría tomar?</p>
-                    <div class="options">
-                        <label class="option">
-                            <input type="radio" name="FormatoClases" value="Presencial" required>
-                            Presenciales
-                        </label>
-                        <label class="option">
-                            <input type="radio" name="FormatoClases" value="Online">
-                            Online (por Zoom)
-                        </label>
-                        <label class="option">
-                            <input type="radio" name="FormatoClases" value="Hibrida">
-                            Híbrida
-                        </label>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Section 2: Actividades de Verano -->
-            <div class="section" id="section2">
-                <h3 class="section-title">Sección 2: Actividades de Verano</h3>
-                
-                <div class="question">
-                    <p class="question-text">¿Qué tipo de actividades te gustaría que se organizaran durante el verano?</p>
-                    <div class="options">
-                        <label class="option">
-                            <input type="checkbox" name="ActividadesVerano" value="Recreativas">
-                            Actividades recreativas
-                        </label>
-                        <label class="option">
-                            <input type="checkbox" name="ActividadesVerano" value="Espirituales">
-                            Actividades espirituales
-                        </label>
-                        <label class="option">
-                            <input type="checkbox" name="ActividadesVerano" value="Servicio">
-                            Servicio y voluntariado
-                        </label>
-                        <label class="option">
-                            <input type="checkbox" name="ActividadesVerano" value="Convivencias">
-                            Convivencias y eventos sociales
-                        </label>
-                    </div>
-                </div>
-
-                <div class="question">
-                    <p class="question-text">¿Tienes alguna sugerencia específica de actividad para el verano?</p>
-                    <textarea name="SugerenciaActividad" placeholder="Escribe tu sugerencia aquí..."></textarea>
-                </div>
-            </div>
-
-            <!-- Section 3: Asistencia -->
-            <div class="section" id="section3">
-                <h3 class="section-title">Sección 3: Asistencia</h3>
-                
-                <div class="question">
-                    <p class="question-text">¿Actualmente asistes al Instituto de Religión?</p>
-                    <div class="options">
-                        <label class="option">
-                            <input type="radio" name="Asistencia" value="Regular" required>
-                            Sí, asisto regularmente
-                        </label>
-                        <label class="option">
-                            <input type="radio" name="Asistencia" value="Ocasional">
-                            Asisto de vez en cuando
-                        </label>
-                        <label class="option">
-                            <input type="radio" name="Asistencia" value="No">
-                            No asisto
-                        </label>
-                    </div>
-                </div>
-
-                <div class="question">
-                    <p class="question-text">Si no asistes o asistes solo ocasionalmente, ¿cuáles son las principales razones?</p>
-                    <div class="options">
-                        <label class="option">
-                            <input type="checkbox" name="Razones" value="FaltaTiempo">
-                            Falta de tiempo por estudios o trabajo
-                        </label>
-                        <label class="option">
-                            <input type="checkbox" name="Razones" value="Horarios">
-                            Horarios que no se ajustan a mi disponibilidad
-                        </label>
-                        <label class="option">
-                            <input type="checkbox" name="Razones" value="NoConozco">
-                            No conozco a muchas personas en el Instituto
-                        </label>
-                        <label class="option">
-                            <input type="checkbox" name="Razones" value="NoMotivado">
-                            No me siento motivado(a) o interesado(a)
-                        </label>
-                        <label class="option">
-                            <input type="checkbox" name="Razones" value="NoSe">
-                            No sé exactamente qué se hace en el Instituto
-                        </label>
-                    </div>
-                </div>
-
-                <div class="question">
-                    <p class="question-text">¿Qué podría motivarte a asistir más seguido al Instituto de Religión?</p>
-                    <div class="options">
-                        <label class="option">
-                            <input type="checkbox" name="Motivacion" value="Horarios">
-                            Horarios más flexibles
-                        </label>
-                        <label class="option">
-                            <input type="checkbox" name="Motivacion" value="Actividades">
-                            Actividades diferentes o más atractivas
-                        </label>
-                        <label class="option">
-                            <input type="checkbox" name="Motivacion" value="Amigos">
-                            Asistir con amigos o conocidos
-                        </label>
-                        <label class="option">
-                            <input type="checkbox" name="Motivacion" value="Informacion">
-                            Mayor información sobre los beneficios de asistir
-                        </label>
-                        <label class="option">
-                            <input type="checkbox" name="Motivacion" value="Ambiente">
-                            Un ambiente más acogedor
-                        </label>
-                    </div>
-                </div>
-
-                <div class="question">
-                    <p class="question-text">¿Hay algo que te gustaría compartir sobre tu experiencia o percepción del Instituto de Religión?</p>
-                    <textarea name="Experiencia" placeholder="Comparte tu experiencia aquí..."></textarea>
-                </div>
-            </div>
-
-            <div class="error-message" id="errorMessage">
-                Por favor completa todos los campos requeridos antes de continuar.
-            </div>
-
-            <div class="nav-buttons">
-                <button type="button" id="prevButton" class="hidden">Anterior</button>
-                <button type="button" id="nextButton">Siguiente</button>
-                <button type="submit" id="submitButton" class="hidden">Enviar</button>
-            </div>
-        </form>
-
-        <div class="thank-you-content hidden" id="thankYouSection">
-            <h2>¡Gracias por tu participación!</h2>
-            <p>Tu opinión es muy valiosa para nosotros.</p>
-            <p>Si aún no nos visitas, te invitamos a conocer el Instituto de Religión. ¡Estamos seguros de que encontrarás un espacio para crecer, aprender y conectar con otros!</p>
+        <div id="talleres-extra" style="display:none;">
+          <label>¿Qué tipo de taller te gustaría?</label>
+          <input type="text" name="TipoTaller" placeholder="Ejemplo: Música, Manualidades, Escritura, etc.">
+          <label>¿En qué formato preferirías las clases?</label>
+          <select name="FormatoClases">
+            <option value="">Selecciona una opción</option>
+            <option value="Presencial">Presencial</option>
+            <option value="En línea">En línea</option>
+            <option value="Híbrido">Híbrido</option>
+          </select>
+          <label>¿Qué te motivaría a asistir a un taller?</label>
+          <textarea name="Motivacion" placeholder="Escribe tu respuesta aquí..."></textarea>
+          <label>¿Tienes alguna sugerencia de taller?</label>
+          <textarea name="SugerenciaTaller" placeholder="Escribe tu sugerencia aquí..."></textarea>
         </div>
+      </div>
+      <div id="section-2" class="section" style="display:none;">
+        <h2>Actividades de Verano</h2>
+        <label>¿Qué actividades te gustaría que se realizaran en verano?</label>
+        <textarea name="ActividadesVerano" placeholder="Ejemplo: Campamento, Servicio, Convivencias, etc."></textarea>
+        <label>¿Tienes alguna sugerencia de actividad?</label>
+        <textarea name="SugerenciaActividad" placeholder="Escribe tu sugerencia aquí..."></textarea>
+      </div>
+      <div id="section-3" class="section" style="display:none;">
+        <h2>Asistencia y Experiencia</h2>
+        <label>¿Con qué frecuencia asistes al Instituto?</label>
+        <select name="Asistencia" required>
+          <option value="">Selecciona una opción</option>
+          <option value="Siempre">Siempre</option>
+          <option value="Frecuentemente">Frecuentemente</option>
+          <option value="A veces">A veces</option>
+          <option value="Rara vez">Rara vez</option>
+          <option value="Nunca">Nunca</option>
+        </select>
+        <label>¿Cuáles son las razones por las que asistes o no asistes?</label>
+        <textarea name="Razones" placeholder="Escribe tus razones aquí..."></textarea>
+        <label>¿Cómo ha sido tu experiencia en el Instituto?</label>
+        <textarea name="Experiencia" placeholder="Comparte tu experiencia aquí..."></textarea>
+      </div>
+      <div class="error" id="errorMsg" style="display:none;"></div>
+      <div class="button-group">
+        <button type="button" id="prevBtn" style="display:none;">Anterior</button>
+        <button type="button" id="nextBtn">Siguiente</button>
+        <button type="submit" id="submitBtn" style="display:none;">Enviar</button>
+      </div>
+    </form>
+    <div id="thankYou" style="display:none; text-align:center; margin-top:32px;">
+      <h2>¡Gracias por tu participación!</h2>
+      <p>Tu opinión es muy valiosa para nosotros.</p>
     </div>
+  </div>
+  <script>
+    // Section navigation
+    const sections = [
+      document.getElementById('section-1'),
+      document.getElementById('section-2'),
+      document.getElementById('section-3')
+    ];
+    let currentSection = 0;
+    const progress = document.getElementById('progress');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const submitBtn = document.getElementById('submitBtn');
+    const errorMsg = document.getElementById('errorMsg');
+    const form = document.getElementById('surveyForm');
+    const thankYou = document.getElementById('thankYou');
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const form = document.getElementById('surveyForm');
-            const sections = Array.from(document.getElementsByClassName('section'));
-            const progressBar = document.getElementById('progressBar');
-            const prevButton = document.getElementById('prevButton');
-            const nextButton = document.getElementById('nextButton');
-            const submitButton = document.getElementById('submitButton');
-            const errorMessage = document.getElementById('errorMessage');
-            const thankYouSection = document.getElementById('thankYouSection');
-            const talleresSection = document.getElementById('talleresSection');
-
-            let currentSection = 0;
-
-            function updateProgress() {
-                const progress = ((currentSection + 1) / sections.length) * 100;
-                progressBar.style.width = `${progress}%`;
-            }
-
-            function showSection(sectionIndex) {
-                sections.forEach((section, index) => {
-                    section.classList.toggle('active', index === sectionIndex);
-                });
-
-                prevButton.classList.toggle('hidden', sectionIndex === 0);
-                nextButton.classList.toggle('hidden', sectionIndex === sections.length - 1);
-                submitButton.classList.toggle('hidden', sectionIndex !== sections.length - 1);
-
-                updateProgress();
-            }
-
-            function validateSection(section) {
-                const requiredInputs = section.querySelectorAll('input[required]');
-                return Array.from(requiredInputs).every(input => {
-                    if (input.type === 'radio') {
-                        const name = input.name;
-                        return section.querySelector(`input[name="${name}"]:checked`);
-                    }
-                    return input.value.trim() !== '';
-                });
-            }
-
-            prevButton.addEventListener('click', () => {
-                if (currentSection > 0) {
-                    currentSection--;
-                    showSection(currentSection);
-                }
-            });
-
-            nextButton.addEventListener('click', () => {
-                if (validateSection(sections[currentSection])) {
-                    errorMessage.style.display = 'none';
-                    if (currentSection < sections.length - 1) {
-                        currentSection++;
-                        showSection(currentSection);
-                    }
-                } else {
-                    errorMessage.style.display = 'block';
-                }
-            });
-
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                if (validateSection(sections[currentSection])) {
-                    form.style.display = 'none';
-                    thankYouSection.classList.remove('hidden');
-                } else {
-                    errorMessage.style.display = 'block';
-                }
-            });
-
-            // Handle conditional display of talleres section
-            const quiereTalleresInputs = document.querySelectorAll('input[name="QuiereTalleres"]');
-            quiereTalleresInputs.forEach(input => {
-                input.addEventListener('change', () => {
-                    talleresSection.classList.toggle('show', input.value === 'Si');
-                });
-            });
-
-            showSection(0);
+    function updateProgress() {
+      progress.style.width = ((currentSection + 1) / sections.length * 100) + '%';
+    }
+    function showSection(idx) {
+      sections.forEach((sec, i) => sec.style.display = (i === idx) ? '' : 'none');
+      prevBtn.style.display = idx === 0 ? 'none' : '';
+      nextBtn.style.display = idx === sections.length - 1 ? 'none' : '';
+      submitBtn.style.display = idx === sections.length - 1 ? '' : 'none';
+      errorMsg.style.display = 'none';
+      updateProgress();
+    }
+    prevBtn.onclick = () => {
+      if (currentSection > 0) {
+        currentSection--;
+        showSection(currentSection);
+      }
+    };
+    nextBtn.onclick = () => {
+      if (validateSection(currentSection)) {
+        currentSection++;
+        showSection(currentSection);
+      }
+    };
+    function validateSection(idx) {
+      errorMsg.style.display = 'none';
+      if (idx === 0) {
+        const quiereTalleres = form.elements['QuiereTalleres'].value;
+        if (!quiereTalleres) {
+          errorMsg.textContent = 'Por favor selecciona si te gustaría que hubiera talleres.';
+          errorMsg.style.display = '';
+          return false;
+        }
+        if (quiereTalleres === 'Sí') {
+          // If "Sí", check at least one of the extra fields is filled
+          const tipo = form.elements['TipoTaller'].value.trim();
+          const formato = form.elements['FormatoClases'].value;
+          const motiv = form.elements['Motivacion'].value.trim();
+          const suger = form.elements['SugerenciaTaller'].value.trim();
+          if (!tipo && !formato && !motiv && !suger) {
+            errorMsg.textContent = 'Por favor llena al menos un campo adicional sobre los talleres.';
+            errorMsg.style.display = '';
+            return false;
+          }
+        }
+      }
+      if (idx === 2) {
+        const asistencia = form.elements['Asistencia'].value;
+        if (!asistencia) {
+          errorMsg.textContent = 'Por favor selecciona tu frecuencia de asistencia.';
+          errorMsg.style.display = '';
+          return false;
+        }
+      }
+      return true;
+    }
+    // Show/hide talleres extra fields
+    form.elements['QuiereTalleres'].forEach
+      ? form.elements['QuiereTalleres'].forEach(radio => {
+          radio.addEventListener('change', function() {
+            document.getElementById('talleres-extra').style.display = (this.value === 'Sí') ? '' : 'none';
+          });
+        })
+      : Array.from(form.elements['QuiereTalleres']).forEach(radio => {
+          radio.addEventListener('change', function() {
+            document.getElementById('talleres-extra').style.display = (this.value === 'Sí') ? '' : 'none';
+          });
         });
-    </script>
+    // On submit
+    form.onsubmit = function(e) {
+      e.preventDefault();
+      if (!validateSection(currentSection)) return;
+      // Here you would handle sending the data to your backend or Google Forms
+      form.style.display = 'none';
+      thankYou.style.display = '';
+      updateProgress();
+    };
+    // Initialize
+    showSection(currentSection);
+    updateProgress();
+    // Show talleres-extra if already selected
+    window.addEventListener('DOMContentLoaded', () => {
+      const selected = form.elements['QuiereTalleres'].value;
+      document.getElementById('talleres-extra').style.display = (selected === 'Sí') ? '' : 'none';
+    });
+  </script>
 </body>
 </html>
