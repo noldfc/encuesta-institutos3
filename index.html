@@ -386,145 +386,131 @@
         </div>
     </div>
     <script>
-        let currentSection = 1;
-        const totalSections = 3;
-        function showSection(n) {
-            for (let i = 1; i <= totalSections; i++) {
-                document.getElementById('section-' + i).classList.remove('active');
+let currentSection = 1;
+const totalSections = 3;
+
+function showSection(n) {
+    for (let i = 1; i <= totalSections; i++) {
+        document.getElementById('section-' + i).classList.remove('active');
+    }
+    document.getElementById('section-' + n).classList.add('active');
+    updateProgressBar();
+}
+
+function nextSection() {
+    if (!validateSection(currentSection)) return;
+    if (currentSection < totalSections) {
+        currentSection++;
+        showSection(currentSection);
+        document.getElementById('errorMessage').style.display = 'none';
+    }
+}
+
+function prevSection() {
+    if (currentSection > 1) {
+        currentSection--;
+        showSection(currentSection);
+        document.getElementById('errorMessage').style.display = 'none';
+    }
+}
+
+function updateProgressBar() {
+    const percent = ((currentSection - 1) / (totalSections - 1)) * 100;
+    document.getElementById('progressBar').style.width = percent + '%';
+}
+
+// Conditional logic functions (keep only those still relevant)
+function toggleOtroActividad() {
+    const otroChecked = document.querySelector('input[name="actividadesVerano"][value="otro"]').checked;
+    document.getElementById('otroActividadText').classList.toggle('hidden', !otroChecked);
+}
+function toggleRazonesNoAsistencia() {
+    const asistencia = document.querySelector('input[name="asistencia"]:checked');
+    const razonesDiv = document.getElementById('razonesNoAsistencia');
+    if (asistencia && asistencia.value === 'regular') {
+        razonesDiv.classList.add('hidden');
+    } else if (asistencia) {
+        razonesDiv.classList.remove('hidden');
+    }
+}
+function toggleOtroRazon() {
+    const otroChecked = document.querySelector('input[name="razones"][value="otro"]').checked;
+    document.getElementById('otroRazonText').classList.toggle('hidden', !otroChecked);
+}
+function toggleOtroMotivacion() {
+    const otroChecked = document.querySelector('input[name="motivacion"][value="otro"]').checked;
+    document.getElementById('otroMotivacionText').classList.toggle('hidden', !otroChecked);
+}
+
+// Progress bar initial
+updateProgressBar();
+
+// Validation logic
+function validateSection(sectionNum) {
+    let valid = true;
+    let errorMsg = '';
+
+    if (sectionNum === 1) {
+        // Only check formato de clases (required)
+        const formatoClases = document.querySelector('input[name="formatoClases"]:checked');
+        if (!formatoClases) {
+            valid = false;
+            errorMsg = 'Por favor, selecciona un formato de clases.';
+        }
+    } else if (sectionNum === 2) {
+        // 1. ¿Qué tipo de actividades te gustaría que se organizaran durante el verano? (required)
+        const actividadesVerano = document.querySelectorAll('input[name="actividadesVerano"]:checked');
+        if (actividadesVerano.length === 0) {
+            valid = false;
+            errorMsg = 'Por favor, selecciona al menos un tipo de actividad.';
+        }
+    } else if (sectionNum === 3) {
+        // 1. ¿Actualmente asistes al Instituto de Religión? (required)
+        const asistencia = document.querySelector('input[name="asistencia"]:checked');
+        if (!asistencia) {
+            valid = false;
+            errorMsg = 'Por favor, selecciona una opción de asistencia.';
+        }
+        // 2. ¿Cuáles son las principales razones? (required if asistencia != 'regular')
+        if (valid && asistencia && asistencia.value !== 'regular') {
+            const razones = document.querySelectorAll('input[name="razones"]:checked');
+            if (razones.length === 0) {
+                valid = false;
+                errorMsg = 'Por favor, selecciona al menos una razón principal.';
             }
-            document.getElementById('section-' + n).classList.add('active');
-            updateProgressBar();
         }
-        function nextSection() {
-            if (!validateSection(currentSection)) return;
-            if (currentSection < totalSections) {
-                currentSection++;
-                showSection(currentSection);
-                document.getElementById('errorMessage').style.display = 'none';
+        // 3. ¿Qué podría motivarte a asistir más seguido al Instituto de Religión? (required)
+        if (valid) {
+            const motivacion = document.querySelectorAll('input[name="motivacion"]:checked');
+            if (motivacion.length === 0) {
+                valid = false;
+                errorMsg = 'Por favor, selecciona al menos una motivación.';
             }
         }
-        function prevSection() {
-            if (currentSection > 1) {
-                currentSection--;
-                showSection(currentSection);
-                document.getElementById('errorMessage').style.display = 'none';
-            }
-        }
-        function updateProgressBar() {
-            const percent = ((currentSection - 1) / (totalSections - 1)) * 100;
-            document.getElementById('progressBar').style.width = percent + '%';
-        }
-        // Conditional logic functions
-        function toggleTalleresQuestions() {
-            const response = document.querySelector('input[name="quiereTalleres"]:checked');
-            const talleresQuestions = document.getElementById('talleresQuestions');
-            if (response && response.value === 'si') {
-                talleresQuestions.classList.remove('hidden');
-            } else {
-                talleresQuestions.classList.add('hidden');
-            }
-        }
-        function toggleOtroTaller() {
-            const otroChecked = document.querySelector('input[name="tipoTaller"][value="otro"]').checked;
-            document.getElementById('otroTallerText').classList.toggle('hidden', !otroChecked);
-        }
-        function toggleOtroActividad() {
-            const otroChecked = document.querySelector('input[name="actividadesVerano"][value="otro"]').checked;
-            document.getElementById('otroActividadText').classList.toggle('hidden', !otroChecked);
-        }
-        function toggleRazonesNoAsistencia() {
-            const asistencia = document.querySelector('input[name="asistencia"]:checked');
-            const razonesDiv = document.getElementById('razonesNoAsistencia');
-            if (asistencia && asistencia.value === 'regular') {
-                razonesDiv.classList.add('hidden');
-            } else if (asistencia) {
-                razonesDiv.classList.remove('hidden');
-            }
-        }
-        function toggleOtroRazon() {
-            const otroChecked = document.querySelector('input[name="razones"][value="otro"]').checked;
-            document.getElementById('otroRazonText').classList.toggle('hidden', !otroChecked);
-        }
-        function toggleOtroMotivacion() {
-            const otroChecked = document.querySelector('input[name="motivacion"][value="otro"]').checked;
-            document.getElementById('otroMotivacionText').classList.toggle('hidden', !otroChecked);
-        }
-        // Progress bar initial
-        updateProgressBar();
-        // Validation logic
-        function validateSection(sectionNum) {
-            let valid = true;
-            let errorMsg = '';
-            if (sectionNum === 1) {
-                // 1. ¿Qué tipo de talleres te interesarían? (required if quiereTalleres == 'si')
-                if (valid && quiereTalleres && quiereTalleres.value === 'si') {
-                    const tipoTaller = document.querySelectorAll('input[name="tipoTaller"]:checked');
-                    if (tipoTaller.length === 0) {
-                        valid = false;
-                        errorMsg = 'Por favor, selecciona al menos un tipo de taller.';
-                    }
-                }
-                // 2. ¿Qué formato de clases te gustaría tomar? (required)
-                if (valid) {
-                    const formatoClases = document.querySelector('input[name="formatoClases"]:checked');
-                    if (!formatoClases) {
-                        valid = false;
-                        errorMsg = 'Por favor, selecciona un formato de clases.';
-                    }
-                }
-            } else if (sectionNum === 2) {
-                // 1. ¿Qué tipo de actividades te gustaría que se organizaran durante el verano? (required)
-                const actividadesVerano = document.querySelectorAll('input[name="actividadesVerano"]:checked');
-                if (actividadesVerano.length === 0) {
-                    valid = false;
-                    errorMsg = 'Por favor, selecciona al menos un tipo de actividad.';
-                }
-            } else if (sectionNum === 3) {
-                // 1. ¿Actualmente asistes al Instituto de Religión? (required)
-                const asistencia = document.querySelector('input[name="asistencia"]:checked');
-                if (!asistencia) {
-                    valid = false;
-                    errorMsg = 'Por favor, selecciona una opción de asistencia.';
-                }
-                // 2. ¿Cuáles son las principales razones? (required if asistencia != 'regular')
-                if (valid && asistencia && asistencia.value !== 'regular') {
-                    const razones = document.querySelectorAll('input[name="razones"]:checked');
-                    if (razones.length === 0) {
-                        valid = false;
-                        errorMsg = 'Por favor, selecciona al menos una razón principal.';
-                    }
-                }
-                // 3. ¿Qué podría motivarte a asistir más seguido al Instituto de Religión? (required)
-                if (valid) {
-                    const motivacion = document.querySelectorAll('input[name="motivacion"]:checked');
-                    if (motivacion.length === 0) {
-                        valid = false;
-                        errorMsg = 'Por favor, selecciona al menos una motivación.';
-                    }
-                }
-            }
-            const errorDiv = document.getElementById('errorMessage');
-            if (!valid) {
-                errorDiv.textContent = errorMsg;
-                errorDiv.style.display = 'block';
-            } else {
-                errorDiv.textContent = '';
-                errorDiv.style.display = 'none';
-            }
-            return valid;
-        }
-        // Classic form submission handler
-        function handleClassicSubmit() {
-            if (!validateSection(3)) {
-                return false;
-            }
-            // Optionally show a thank you message after submission
-            setTimeout(function() {
-                document.getElementById('surveyForm').classList.add('hidden');
-                document.getElementById('thankYouMessage').classList.remove('hidden');
-            }, 1000);
-            return true;
-        }
-    </script>
+    }
+    const errorDiv = document.getElementById('errorMessage');
+    if (!valid) {
+        errorDiv.textContent = errorMsg;
+        errorDiv.style.display = 'block';
+    } else {
+        errorDiv.textContent = '';
+        errorDiv.style.display = 'none';
+    }
+    return valid;
+}
+
+// Classic form submission handler
+function handleClassicSubmit() {
+    if (!validateSection(3)) {
+        return false;
+    }
+    // Optionally show a thank you message after submission
+    setTimeout(function() {
+        document.getElementById('surveyForm').classList.add('hidden');
+        document.getElementById('thankYouMessage').classList.remove('hidden');
+    }, 1000);
+    return true;
+}
+</script>
 </body>
 </html>
