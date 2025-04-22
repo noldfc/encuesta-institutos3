@@ -456,13 +456,7 @@
             let valid = true;
             let errorMsg = '';
             if (sectionNum === 1) {
-                // 1. ¿Te gustaría que se ofrecieran talleres durante el semestre 3? (required)
-                const quiereTalleres = document.querySelector('input[name="quiereTalleres"]:checked');
-                if (!quiereTalleres) {
-                    valid = false;
-                    errorMsg = 'Por favor, selecciona si te gustaría que se ofrecieran talleres.';
-                }
-                // 2. ¿Qué tipo de talleres te interesarían? (required if quiereTalleres == 'si')
+                // 1. ¿Qué tipo de talleres te interesarían? (required if quiereTalleres == 'si')
                 if (valid && quiereTalleres && quiereTalleres.value === 'si') {
                     const tipoTaller = document.querySelectorAll('input[name="tipoTaller"]:checked');
                     if (tipoTaller.length === 0) {
@@ -470,7 +464,7 @@
                         errorMsg = 'Por favor, selecciona al menos un tipo de taller.';
                     }
                 }
-                // 3. ¿Qué formato de clases te gustaría tomar? (required)
+                // 2. ¿Qué formato de clases te gustaría tomar? (required)
                 if (valid) {
                     const formatoClases = document.querySelector('input[name="formatoClases"]:checked');
                     if (!formatoClases) {
