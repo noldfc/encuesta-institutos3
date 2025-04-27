@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Encuesta de Semestre 3 - Instituto de Religión Chihuahua</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Lato', Arial, sans-serif;
+      background: #f5f7fa;
+      margin: 0;
+      padding: 0;
+    }
+    .banner {
+      width: 100%;
+      margin-bottom: 30px;
+      text-align: center;
+      background: #fff;
+    }
+    .banner img {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+    .container {
+      background: #fff;
+      max-width: 700px;
+      margin: 30px auto;
+      padding: 30px 40px 40px 40px;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    }
+    h2 {
+      color: #3366ff;
+      margin-bottom: 10px;
+      font-size: 2em;
+      font-weight: 700;
+    }
+    h3 {
+      color: #3366ff;
+      margin-top: 30px;
+      margin-bottom: 10px;
+      font-size: 1.2em;
+      font-weight: 600;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+    input[type="text"], input[type="email"], select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 18px;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      font-size: 1em;
+      background: #f9fafb;
+      box-sizing: border-box;
+    }
+    input[type="radio"], input[type="checkbox"] {
+      margin-right: 8px;
+    }
+    .button-group {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+    }
+    button, input[type="submit"] {
+      background: #3366ff;
+      color: #fff;
+      border: none;
+      padding: 12px 32px;
+      border-radius: 6px;
+      font-size: 1em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    button[disabled], input[type="submit"][disabled] {
+      background: #b3c6ff;
+      cursor: not-allowed;
+    }
+    .progress-bar {
+      width: 100%;
+      background: #e0e7ff;
+      border-radius: 8px;
+      margin-bottom: 30px;
+      height: 16px;
+      overflow: hidden;
+    }
+    .progress {
+      height: 100%;
+      background: #3366ff;
+      width: 0%;
+      transition: width 0.3s;
+    }
+    .thank-you {
+      text-align: center;
+      color: #3366ff;
+      font-size: 1.5em;
+      font-weight: 700;
+      margin-top: 40px;
+    }
+    .thank-you small {
+      display: block;
+      margin-top: 20px;
+      color: #222;
+      font-size: 1em;
+      font-weight: 400;
+    }
+    @media (max-width: 600px) {
+      .container {
+        padding: 16px 4vw 24px 4vw;
+      }
+      h2 {
+        font-size: 1.3em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="banner">
+    <img src="survey-banner-semestre-3.png" alt="Instituto de Religión Chihuahua - Encuesta de Semestre 3">
+  </div>
+  <div class="container">
+    <form id="surveyForm" action="https://script.google.com/macros/s/AKfycbxN7qlIFz-yOqwXgg0_W1SjBc1_1f-GU_WGe2_gDD0EIJWSYD8gwHsCpoxp6DsTa_rB/exec" method="POST" target="hidden_iframe" onsubmit="return submitForm(event)">
+      <div class="progress-bar">
+        <div class="progress" id="progress"></div>
+      </div>
+      <!-- SECCIÓN 1 -->
+      <div id="section-1" class="section">
+        <h2>Talleres y formato</h2>
+        <h3>¿Qué tipo de talleres te interesa tomar en Instituto? <span style="font-weight:400; font-size:0.9em;">(Puedes seleccionar más de una opción)</span></h3>
+        <label><input type="checkbox" name="Talleres" value="Desarrollo espiritual"> Desarrollo espiritual (ejemplo: estudio de escrituras, temas del Evangelio)</label>
+        <label><input type="checkbox" name="Talleres" value="Habilidades prácticas"> Habilidades prácticas (ejemplo: liderazgo, comunicación, manejo del tiempo)</label>
+        <label><input type="checkbox" name="Talleres" value="Arte y creatividad"> Arte y creatividad (ejemplo: música, pintura, escritura)</label>
+        <label><input type="checkbox" name="Talleres" value="Servicio y voluntariado"> Servicio y voluntariado (ejemplo: proyectos de ayuda comunitaria, actividades de servicio)</label>
+        <label><input type="checkbox" name="Talleres" value="Salud y bienestar"> Salud y bienestar (ejemplo: manejo del estrés, hábitos saludables, meditación)</label>
+        <label><input type="checkbox" name="Talleres" value="Otro" onclick="showOther('Talleres', this)"> Otro</label>
+        <input type="text" name="Talleres_Otro" id="Talleres_Otro" style="display:none;" placeholder="Por favor especifica">
+        <label style="margin-top:18px;">¿Tienes alguna otra sugerencia específica de taller que te gustaría que se ofreciera? (opcional)
+          <input type="text" name="Sugerencia_Taller" placeholder="Escribe aquí tu sugerencia">
+        </label>
+        <h3>¿Qué formato de clases te gustaría tomar?</h3>
+        <label><input type="radio" name="Formato" value="Presenciales" required> Presenciales</label>
+        <label><input type="radio" name="Formato" value="Online (por Zoom)" required> Online (por Zoom)</label>
+        <label><input type="radio" name="Formato" value="Híbrida" required> Híbrida (una combinación de clases presenciales y online)</label>
+        <div class="button-group">
+          <button type="button" onclick="nextSection(1)">Siguiente</button>
+        </div>
+      </div>
+      <!-- SECCIÓN 2 -->
+      <div id="section-2" class="section" style="display:none;">
+        <h2>Actividades de verano</h2>
+        <h3>¿Qué tipo de actividades te gustaría que se organizaran durante el verano en el Instituto? <span style="font-weight:400; font-size:0.9em;">(Puedes seleccionar más de una opción)</span></h3>
+        <label><input type="checkbox" name="Actividades_Verano" value="Actividades recreativas"> Actividades recreativas (ejemplo: deportes, juegos, subir cerros)</label>
+        <label><input type="checkbox" name="Actividades_Verano" value="Actividades espirituales"> Actividades espirituales (ejemplo: devocionales, noches de testimonios, foros)</label>
+        <label><input type="checkbox" name="Actividades_Verano" value="Servicio y voluntariado"> Servicio y voluntariado (ejemplo: proyectos comunitarios, campañas de ayuda)</label>
+        <label><input type="checkbox" name="Actividades_Verano" value="Convivencias y eventos sociales"> Convivencias y eventos sociales (ejemplo: bailes, noches de cine, convivios, fiestas temáticas)</label>
+        <label><input type="checkbox" name="Actividades_Verano" value="Otro" onclick="showOther('Actividades_Verano', this)"> Otro</label>
+        <input type="text" name="Actividades_Verano_Otro" id="Actividades_Verano_Otro" style="display:none;" placeholder="Por favor especifica">
+        <label style="margin-top:18px;">¿Tienes alguna otra sugerencia específica de actividad para el verano? (opcional)
+          <input type="text" name="Sugerencia_Actividad_Verano" placeholder="Escribe aquí tu sugerencia">
+        </label>
+        <div class="button-group">
+          <button type="button" onclick="prevSection(2)">Anterior</button>
+          <button type="button" onclick="nextSection(2)">Siguiente</button>
+        </div>
+      </div>
+      <!-- SECCIÓN 3 -->
+      <div id="section-3" class="section" style="display:none;">
+        <h2>Asistencia</h2>
+        <h3>¿Actualmente asistes al Instituto de Religión?</h3>
+        <label><input type="radio" name="Asistencia" value="Sí, asisto regularmente" required onclick="toggleMotivos(false)"> Sí, asisto regularmente</label>
+        <label><input type="radio" name="Asistencia" value="Asisto de vez en cuando" required onclick="toggleMotivos(true)"> Asisto de vez en cuando</label>
+        <label><input type="radio" name="Asistencia" value="No asisto" required onclick="toggleMotivos(true)"> No asisto</label>
+        <div id="motivosBlock" style="display:none; margin-top:18px;">
+          <h3>Si no asistes o asistes solo ocasionalmente, ¿cuáles son las principales razones? <span style="font-weight:400; font-size:0.9em;">(Puedes seleccionar más de una opción)</span></h3>
+          <label><input type="checkbox" name="Motivos" value="Falta de tiempo por estudios o trabajo"> Falta de tiempo por estudios o trabajo</label>
+          <label><input type="checkbox" name="Motivos" value="Horarios que no se ajustan a mi disponibilidad"> Horarios que no se ajustan a mi disponibilidad</label>
+          <label><input type="checkbox" name="Motivos" value="No conozco a muchas personas en el Instituto"> No conozco a muchas personas en el Instituto</label>
+          <label><input type="checkbox" name="Motivos" value="No me siento motivado(a) o interesado(a)"> No me siento motivado(a) o interesado(a)</label>
+          <label><input type="checkbox" name="Motivos" value="No sé exactamente qué se hace en el Instituto"> No sé exactamente qué se hace en el Instituto</label>
+          <label><input type="checkbox" name="Motivos" value="Prefiero dedicar mi tiempo a otras actividades"> Prefiero dedicar mi tiempo a otras actividades</label>
+          <label><input type="checkbox" name="Motivos" value="No me siento cómodo(a) en el ambiente"> No me siento cómodo(a) en el ambiente</label>
+          <label><input type="checkbox" name="Motivos" value="No recibí información suficiente sobre el Instituto"> No recibí información suficiente sobre el Instituto</label>
+          <label><input type="checkbox" name="Motivos" value="Otro" onclick="showOther('Motivos', this)"> Otro</label>
+          <input type="text" name="Motivos_Otro" id="Motivos_Otro" style="display:none;" placeholder="Por favor especifica">
+        </div>
+        <h3 style="margin-top:18px;">¿Qué podría motivarte a asistir más seguido al Instituto de Religión? <span style="font-weight:400; font-size:0.9em;">(Puedes seleccionar más de una opción)</span></h3>
+        <label><input type="checkbox" name="Motivacion" value="Horarios más flexibles"> Horarios más flexibles</label>
+        <label><input type="checkbox" name="Motivacion" value="Actividades diferentes o más atractivas"> Actividades diferentes o más atractivas</label>
+        <label><input type="checkbox" name="Motivacion" value="Asistir con amigos o conocidos"> Asistir con amigos o conocidos</label>
+        <label><input type="checkbox" name="Motivacion" value="Mayor información sobre los beneficios de asistir"> Mayor información sobre los beneficios de asistir</label>
+        <label><input type="checkbox" name="Motivacion" value="Un ambiente más acogedor"> Un ambiente más acogedor</label>
+        <label><input type="checkbox" name="Motivacion" value="Otro" onclick="showOther('Motivacion', this)"> Otro</label>
+        <input type="text" name="Motivacion_Otro" id="Motivacion_Otro" style="display:none;" placeholder="Por favor especifica">
+        <h3 style="margin-top:18px;">¿Hay algo que te gustaría compartir sobre tu experiencia o percepción del Instituto de Religión?</h3>
+        <textarea name="Comentarios" rows="3" placeholder="Escribe aquí tu comentario"></textarea>
+        <div class="button-group">
+          <button type="button" onclick="prevSection(3)">Anterior</button>
+          <button type="button" onclick="nextSection(3)">Siguiente</button>
+        </div>
+      </div>
+      <!-- SECCIÓN 4 -->
+      <div id="section-4" class="section" style="display:none;">
+        <h2>Datos adicionales</h2>
+        <h3>Por favor, indica tu rango de edad:</h3>
+        <label><input type="radio" name="Edad_Rango" value="18-25 años" required> 18-25 años</label>
+        <label><input type="radio" name="Edad_Rango" value="26-35 años" required> 26-35 años</label>
+        <h3>Eres:</h3>
+        <label><input type="radio" name="Estado_Civil" value="Casad@" required> Casad@</label>
+        <label><input type="radio" name="Estado_Civil" value="Solter@" required> Solter@</label>
+        <h3>¿Eres misioner@ retornad@?</h3>
+        <label><input type="radio" name="Misionero_Retornado" value="Sí" required> Sí</label>
+        <label><input type="radio" name="Misionero_Retornado" value="No" required> No</label>
+        <h3>Eres:</h3>
+        <label><input type="radio" name="Genero" value="Hombre" required> Hombre</label>
+        <label><input type="radio" name="Genero" value="Mujer" required> Mujer</label>
+        <div class="button-group">
+          <button type="button" onclick="prevSection(4)">Anterior</button>
+          <input type="submit" value="Enviar">
+        </div>
+      </div>
+    </form>
+    <div class="thank-you" id="thankYou" style="display:none;">
+      <small>¡Muchas gracias por responder!<br>Tu opinión es muy valiosa para nosotros.<br><br>
+      <strong>📝 ¡El siguiente paso es inscribirte a Instituto Puedes hacerlo directamente en <a href="https://form.jotform.com/230085502343850" target="_blank">este link</a>.</strong><br><br>
+      <small>Si aún no nos visitas, te invitamos a conocer lo que tenemos para ti. ¡Perteneces con nosotros!<br>
+      📍 <a href="https://maps.app.goo.gl/8bb37uG5t7QhPPY78" target="_blank">Visítanos aquí</a><br><br>
+      📱 Síguenos en Instagram: <a href="https://instagram.com/institutocuu" target="_blank">@institutocuu</a></small>
+    </div>
+    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+  </div>
+  <script>
+    // Section navigation
+    let currentSection = 1;
+    const totalSections = 4;
+    function showSection(n) {
+      for (let i = 1; i <= totalSections; i++) {
+        document.getElementById('section-' + i).style.display = (i === n) ? 'block' : 'none';
+      }
+      document.getElementById('progress').style.width = ((n-1)/(totalSections-1))*100 + '%';
+    }
+    function nextSection(n) {
+      if (validateSection(n)) {
+        currentSection = n + 1;
+        showSection(currentSection);
+      }
+    }
+    function prevSection(n) {
+      currentSection = n - 1;
+      showSection(currentSection);
+    }
+    function validateSection(n) {
+      const section = document.getElementById('section-' + n);
+
+      // Validate required radio and text fields
+      const required = section.querySelectorAll('[required]');
+      for (let input of required) {
+        if (input.type === 'radio') {
+          const name = input.name;
+          if (!section.querySelector('input[name="' + name + '"]:checked')) {
+            alert('Por favor, responde todas las preguntas obligatorias.');
+            return false;
+          }
+        } else if (input.type === 'text' || input.tagName === 'TEXTAREA') {
+          if (input.required && input.value.trim() === '') {
+            alert('Por favor, completa todos los campos obligatorios.');
+            return false;
+          }
+        }
+      }
+
+      // Validate at least one checkbox for multi-option questions
+      // Section 1: Talleres
+      if (n === 1) {
+        const checkboxes = section.querySelectorAll('input[name="Talleres"]');
+        if (![...checkboxes].some(cb => cb.checked)) {
+          alert('Por favor, selecciona al menos una opción de talleres.');
+          return false;
+        }
+      }
+      // Section 2: Actividades_Verano
+      if (n === 2) {
+        const checkboxes = section.querySelectorAll('input[name="Actividades_Verano"]');
+        if (![...checkboxes].some(cb => cb.checked)) {
+          alert('Por favor, selecciona al menos una opción de actividades de verano.');
+          return false;
+        }
+      }
+      // Section 3: Motivos (if visible)
+      if (n === 3 && document.getElementById('motivosBlock').style.display !== 'none') {
+        const checkboxes = section.querySelectorAll('input[name="Motivos"]');
+        if (![...checkboxes].some(cb => cb.checked)) {
+          alert('Por favor, selecciona al menos una razón en la sección de motivos.');
+          return false;
+        }
+      }
+      // Section 3: Motivacion
+      if (n === 3) {
+        const checkboxes = section.querySelectorAll('input[name="Motivacion"]');
+        if (![...checkboxes].some(cb => cb.checked)) {
+          alert('Por favor, selecciona al menos una opción de motivación.');
+          return false;
+        }
+      }
+
+      return true;
+    }
+    // Show/hide "Otro" text fields
+    function showOther(field, el) {
+      const id = field + '_Otro';
+      if (el.checked) {
+        document.getElementById(id).style.display = 'block';
+      } else {
+        document.getElementById(id).style.display = 'none';
+      }
+    }
+    // Show/hide motivos block
+    function toggleMotivos(show) {
+      document.getElementById('motivosBlock').style.display = show ? 'block' : 'none';
+    }
+    // Form submission
+    function submitForm(e) {
+      e.preventDefault();
+      document.getElementById('surveyForm').style.display = 'none';
+      document.getElementById('thankYou').style.display = 'block';
+      // Actually submit the form
+      setTimeout(function() {
+        document.getElementById('surveyForm').submit();
+      }, 100);
+      return false;
+    }
+    // Progress bar initial state
+    showSection(1);
+  </script>
+</body>
+</html>
